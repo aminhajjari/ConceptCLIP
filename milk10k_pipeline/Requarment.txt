@@ -1,0 +1,112 @@
+# requirements.txt
+# Core ML and Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+huggingface_hub>=0.16.0
+
+# Computer Vision
+opencv-python>=4.8.0
+Pillow>=10.0.0
+scikit-image>=0.21.0
+
+# Medical Image Processing
+pydicom>=2.4.0
+nibabel>=5.1.0
+SimpleITK>=2.3.0
+
+# SAM2 (install from source)
+# git+https://github.com/facebookresearch/segment-anything-2.git
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Progress and UI
+tqdm>=4.65.0
+
+# File handling
+pathlib2>=2.3.0
+
+# Development and Testing (optional)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.0.0
+
+# ================================
+# setup.py
+
+from setuptools import setup, find_packages
+from pathlib import Path
+
+# Read README for long description
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text() if (this_directory / "README.md").exists() else ""
+
+# Read requirements
+requirements = []
+if (this_directory / "requirements.txt").exists():
+    with open(this_directory / "requirements.txt") as f:
+        requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+
+setup(
+    name="milk10k-pipeline",
+    version="1.0.0",
+    author="MILK10k Pipeline Team",
+    author_email="your.email@domain.com",
+    description="Medical image segmentation and classification pipeline for MILK10k dataset",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/yourusername/milk10k-pipeline",
+    packages=find_packages(),
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Science/Research",
+        "Intended Audience :: Healthcare Industry",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Scientific/Engineering :: Medical Science Apps.",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+    ],
+    python_requires=">=3.8",
+    install_requires=requirements,
+    extras_require={
+        "dev": [
+            "pytest>=7.4.0",
+            "pytest-cov>=4.1.0", 
+            "black>=23.0.0",
+            "flake8>=6.0.0",
+            "pre-commit>=3.0.0",
+        ],
+        "gpu": [
+            "torch[cuda]>=2.0.0",
+        ],
+        "docs": [
+            "sphinx>=5.0.0",
+            "sphinx-rtd-theme>=1.2.0",
+            "myst-parser>=2.0.0",
+        ]
+    },
+    entry_points={
+        "console_scripts": [
+            "milk10k-pipeline=main:main",
+        ],
+    },
+    include_package_data=True,
+    zip_safe=False,
+    keywords="medical imaging, segmentation, classification, SAM2, ConceptCLIP, MILK10k",
+    project_urls={
+        "Bug Reports": "https://github.com/yourusername/milk10k-pipeline/issues",
+        "Source": "https://github.com/yourusername/milk10k-pipeline",
+        "Documentation": "https://milk10k-pipeline.readthedocs.io/",
+    },
+)
