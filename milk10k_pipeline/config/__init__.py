@@ -9,7 +9,7 @@ and ConceptCLIP classification on the MILK10k dataset.
 __version__ = "1.0.0"
 __author__ = "MILK10k Pipeline Team"
 
-from .core.pipeline import MILK10kPipeline
+from core.pipeline import MILK10kPipeline
 from .config.settings import MILK10K_DOMAIN
 
 __all__ = ['MILK10kPipeline', 'MILK10K_DOMAIN']
